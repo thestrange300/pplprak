@@ -26,7 +26,7 @@
         <aside class="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 2xl:w-[13%]">
             <div>
                 <div class="-mx-6 px-6 py-4">
-                    <a href="/test" title="home">
+                    <a href="/" title="home">
                         <img src="{{asset('img/logo.png')}}" class="relative float-left" alt="logo sd">
 
                     </a>
