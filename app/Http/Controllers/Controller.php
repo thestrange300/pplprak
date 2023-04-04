@@ -29,35 +29,35 @@ class Controller extends BaseController
         return view('CPLedit',compact(['cpl','bk',"cpl_bk","values"]));
     }
 
-    public function update(Request $request, $id){ 
-        dd($request);
-        // $bk = BK::find($id);
-        // $cpl_bk = DB::select('SELECT det.bk AS kode_bk,GROUP_CONCAT(det.cpl) AS pemetaan FROM detail_cplbk det GROUP BY kode_bk where det.bk = ? group by kode_bk',[$bk->kodeBK]);
-        // $cpl = CPL::all();
-        // $cpl_bks = json_encode($cpl_bk);
-        // $recordIds = $request->input('checkboxes', []);
+    public function update(Request $request, $kodeBK){ 
+        
+        $bk = BK::where('kodeBK',$kodeBK)->first();
+        $cpl_bk = DB::select('SELECT det.bk AS kode_bk,GROUP_CONCAT(det.cpl) AS pemetaan FROM detail_cplbk det where det.bk = ? group by kode_bk',[$bk->kodeBK]);
+        $cpl = CPL::all();
+        $cpl_bks = json_encode($cpl_bk);
+        $recordIds = $request->input('checkboxes', []);
 
 
-        // foreach ($cpl as $record) {
-        //     if (in_array($record->kodeCPL, $recordIds)) {
-        //         // Checkbox is checked, update the record
-        //         if($cpl_bk){
-        //             foreach(json_decode($cpl_bks,true) as $data){
-        //                 if(!(in_array($record->kodeCPL, explode(',', (json_decode(json_encode($data["pemetaan"]),true)))))){
-        //                     DB::insert('insert into detail_cplbk (bk, cpl) values (?, ?)', [$bk->kodeBK, $record->kodeCPL]);
-        //                 }
+        foreach ($cpl as $record) {
+            if (in_array($record->kodeCPL, $recordIds)) {
+                // Checkbox is checked, update the record
+                if($cpl_bk){
+                    foreach(json_decode($cpl_bks,true) as $data){
+                        if(!(in_array($record->kodeCPL, explode(',', (json_decode(json_encode($data["pemetaan"]),true)))))){
+                            DB::insert('insert into detail_cplbk (bk, cpl) values (?, ?)', [$bk->kodeBK, $record->kodeCPL]);
+                        }
 
 
-        //             }
-        //         }else{
-        //             DB::insert('insert into detail_cplbk (bk, cpl) values (?, ?)', [$bk->kodeBK, $record->kodeCPL]);
-        //         }
-        //     } else {
-        //         // Checkbox is unchecked, delete the record
-        //         DB::delete('delete from detail_cplbk where bk = ? and cpl = ?', [$bk->kodeBK, $record->kodeCPL]);
-        //     }
-        // }
-        // return redirect()->back()->with('success', 'Data barang berhasil diubah');
+                    }
+                }else{
+                    DB::insert('insert into detail_cplbk (bk, cpl) values (?, ?)', [$bk->kodeBK, $record->kodeCPL]);
+                }
+            } else {
+                // Checkbox is unchecked, delete the record
+                DB::delete('delete from detail_cplbk where bk = ? and cpl = ?', [$bk->kodeBK, $record->kodeCPL]);
+            }
+        }
+        return redirect()->back()->with('success', 'Data barang berhasil diubah');
     }
 
     

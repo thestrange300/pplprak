@@ -2,17 +2,17 @@
 
 @section('container')
 
-<div class="mt-10 p-6 max-w-sm mx-auto max-w-none flex justify-left">
+<div class="mt-2 p-6 max-w-sm mx-auto max-w-none flex justify-left">
   <a href="/edit" class="duration-500 transform items-center justify-center px-8 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-cyan-400 to-blue-400"> Edit </a>
 </div>
 
-<table class="table-fixed w-full min-w-full divide-y divide-gray-300 text-center">
+<table class="table-auto w-full min-w-full divide-y divide-gray-300 text-center">
     <thead class="bg-gray-50">
       <tr>
-        <th scope="col" class="py-3.5 lg:px-4 text-center text-xs font-semibold text-gray-900">BK</th>
-        <th scope="col" class="py-3.5 lg:px-4 text-center text-xs font-semibold text-gray-900">Nama BK</th>
+        <th scope="col" class="py-3.5 lg:px-4 w-1/6 text-center text-xs font-semibold text-gray-900">BK</th>
+        <th scope="col" class="py-3.5 lg:px-4 w-2/6 text-center text-xs font-semibold text-gray-900">Nama BK</th>
         @foreach ($cpl as $cpl1)
-          <th scope="col" class="py-3.5 lg:px-2 text-center text-xs font-semibold text-gray-900">{{ $cpl1->kodeCPL }}          
+          <th scope="col" class="py-3.5 lg:px-2 text-center text-xs font-semibold text-gray-900">{{ $cpl1->kodeCPL }}    </th>       
         @endforeach
       </tr>
     </thead>
@@ -23,10 +23,10 @@
           {{-- <td class="first-row-heading"></td> --}}
           {{-- <td>{{ $loop->iteration }}</td> --}}
           <td>
-              <input type="text" name="matakuliah_kode" class="py-3.5 lg:px-4 text-center text-xs font-semibold text-gray-900" value="{{ $bk1->kodeBK }}" placeholder="Kode MK">
+              <p class="py-3.5 text-center text-xs font-semibold text-gray-900">{{ $bk1->kodeBK }}</p>
           </td>
           <td>
-              <input type="text" name="matakuliah_nama" class="py-3.5 lg:px-4 text-center text-xs font-semibold text-gray-900" value="{{ $bk1->namaBK }}" placeholder="Nama MK">
+              <p class="py-3.5 text-center text-xs font-semibold text-gray-900">{{ $bk1->namaBK }}</p>
           </td>
 
           <?php if (in_array($bk1->kodeBK, $values)) { ?>
