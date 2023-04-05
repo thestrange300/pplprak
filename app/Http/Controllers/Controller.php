@@ -76,9 +76,5 @@ class Controller extends BaseController
         return view('CPL',compact(['cpl','bk',"cpl_bk","values"]));
     }
 
-
-    
-    
-
 }
     
